@@ -33,9 +33,7 @@ const SocialShare = () => {
 
   return (
     <div style={{ textAlign: "center", padding: "10px" }}>
-      <h2
-        style={{ fontSize: "1.2rem", fontWeight: "bold", marginBottom: "20px" }}
-      >
+      <h2 style={{ fontSize: "1.2rem", fontWeight: "bold", marginBottom: "20px" }}>
         Share This Question Via
       </h2>
       <div
@@ -77,9 +75,7 @@ const SocialShare = () => {
 
         <IconButton
           component="a"
-          href={`https://wa.me/?text=${encodeURIComponent(
-            `${shareText} ${shareUrl}`
-          )}`}
+          href={`https://wa.me/?text=${encodeURIComponent(`${shareText} ${shareUrl}`)}`}
           target="_blank"
           rel="noopener noreferrer"
           title="Share on WhatsApp"

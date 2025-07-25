@@ -1,8 +1,8 @@
 import React from 'react';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
-import ShareDialogWrapper from './App';
+import ShareDialogWrapper from './ShareDialogWrapper';
 
-// Mock clipboard API
+// Mock clipboard API before tests run
 beforeAll(() => {
   Object.defineProperty(navigator, 'clipboard', {
     value: { writeText: jest.fn() },
@@ -16,13 +16,12 @@ describe('ShareDialogWrapper', () => {
     expect(screen.getByRole('button', { name: /share this/i })).toBeInTheDocument();
   });
 
-  it('opens and closes the dialog', () => {
+  it('opens and closes the dialog', async () => {
     render(<ShareDialogWrapper />);
     fireEvent.click(screen.getByRole('button', { name: /share this/i }));
     expect(screen.getByText(/share this page/i)).toBeInTheDocument();
     fireEvent.click(screen.getByRole('button', { name: /close/i }));
-    // Dialog should close (title should not be in the document)
-    waitFor(() => {
+    await waitFor(() => {
       expect(screen.queryByText(/share this page/i)).not.toBeInTheDocument();
     });
   });
@@ -49,4 +48,4 @@ describe('ShareDialogWrapper', () => {
       expect(window.alert).toHaveBeenCalledWith('Link copied to clipboard!');
     });
   });
-}); 
+});
